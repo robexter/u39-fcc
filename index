@@ -437,7 +437,7 @@
             id: "t1",
             title: "CENTUM VP",
             type: "presentation",
-            url: "https://acc-10850.ispring.com/app/s?s=project%2Fe8bc7184-26ea-11f1-8eb1-961a59e9eeb5%2Fe8bdd622-26ea-11f1-8eb1-961a59e9eeb5",
+            url: "https://acc-10850.ispring.com/app/preview/ddfab0fc-2813-11f1-aaf2-1e1dea798655?s=project%2Fe8bc7184-26ea-11f1-8eb1-961a59e9eeb5%2Fe8bdd622-26ea-11f1-8eb1-961a59e9eeb5",
             desc: "Responsavel por fornecer blocos funcionais para monitoramento, controle, manipulações, cálculos, funções lógicas e sequências.",
             infoExtra: "Engloba controle contínuo e avancado de sequência complexa, que pode ser executado em um ambiente de controle redundante, seguro e confiável."
         },
