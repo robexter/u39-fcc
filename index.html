@@ -1,0 +1,1428 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Training Painel U-39 | Craqueamento Industrial/FCC - Login</title>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #0b0b0b;
+            font-family: 'Inter', sans-serif;
+            color: #e5e5e5;
+            overflow-x: hidden;
+        }
+
+        /* Netflix-style scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1f1f1f;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #e50914;
+            border-radius: 10px;
+        }
+
+        /* ==================== LOGIN PAGE ==================== */
+        .login-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, rgba(0,0,0,0.9) 0%, rgba(20,10,10,0.95) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80') center/cover;
+            opacity: 0.15;
+            z-index: 0;
+        }
+
+        .login-box {
+            background: #0a0a0a;
+            border: 1px solid #2c2c2c;
+            border-radius: 20px;
+            padding: 2.5rem;
+            width: 100%;
+            max-width: 420px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+            position: relative;
+            z-index: 1;
+            animation: slideUp 0.5s ease;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .login-logo {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .login-logo i {
+            font-size: 2.5rem;
+            color: #e50914;
+            margin-bottom: 0.5rem;
+        }
+
+        .login-logo h2 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 0.3rem;
+        }
+
+        .login-logo p {
+            font-size: 0.85rem;
+            color: #999;
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #ddd;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .form-group input {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            padding: 12px 16px;
+            border-radius: 8px;
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            outline: none;
+            transition: 0.2s;
+        }
+
+        .form-group input:focus {
+            border-color: #e50914;
+            background: #1f1f1f;
+            box-shadow: 0 0 10px rgba(229, 9, 20, 0.3);
+        }
+
+        .form-group input::placeholder {
+            color: #666;
+        }
+
+        .login-remember {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            color: #aaa;
+        }
+
+        .login-remember input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+            accent-color: #e50914;
+        }
+
+        .btn-login {
+            background: #e50914;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            color: white;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 0.5rem;
+        }
+
+        .btn-login:hover {
+            background: #b81a24;
+            transform: scale(0.98);
+        }
+
+        .btn-login:active {
+            transform: scale(0.95);
+        }
+
+        .login-footer {
+            text-align: center;
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 1.5rem;
+            border-top: 1px solid #2a2a2a;
+            padding-top: 1.5rem;
+        }
+
+        .login-error {
+            background: #4a0a0a;
+            border: 1px solid #e50914;
+            color: #ff6b6b;
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            display: none;
+            margin-bottom: 1rem;
+            animation: shake 0.3s ease;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        .login-error.show {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .admin-toggle {
+            text-align: center;
+            margin-top: 1rem;
+            font-size: 0.8rem;
+        }
+
+        .admin-toggle a {
+            color: #e50914;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        /* ==================== MEMBER DASHBOARD ==================== */
+        .dashboard-container {
+            display: none;
+            min-height: 100vh;
+            background-color: #0b0b0b;
+        }
+
+        .dashboard-header {
+            background: linear-gradient(77deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.65) 100%), 
+                        url('https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80') center/cover;
+            height: 45vh;
+            display: flex;
+            align-items: flex-end;
+            padding: 2rem 4rem;
+            position: relative;
+        }
+
+        .dashboard-header-content {
+            max-width: 650px;
+            z-index: 2;
+        }
+
+        .dashboard-header h1 {
+            font-size: 3.3rem;
+            font-weight: 800;
+            margin-bottom: 0.8rem;
+        }
+
+        .dashboard-header p {
+            font-size: 1.1rem;
+            color: #ddd;
+            margin-bottom: 1.5rem;
+        }
+
+        .user-badge {
+            background: #e50914;
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .top-nav {
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 4rem;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #2a2a2a;
+            z-index: 100;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            color: #ddd;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: 0.2s;
+        }
+
+        .nav-menu a:hover {
+            color: #e50914;
+        }
+
+        .nav-user {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .user-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: #e50914;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .user-avatar:hover {
+            transform: scale(1.1);
+        }
+
+        .btn-logout {
+            background: transparent;
+            border: 1px solid #e50914;
+            color: #e50914;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: 0.2s;
+        }
+
+        .btn-logout:hover {
+            background: #e509141a;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem 3rem;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 1.8rem 0 1rem 0;
+            border-left: 5px solid #e50914;
+            padding-left: 15px;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.8rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .template-card {
+            background: #1a1a1a;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.25s ease, box-shadow 0.2s;
+            cursor: pointer;
+            border: 1px solid #2c2c2c;
+        }
+
+        .template-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.6);
+            border-color: #e50914;
+        }
+
+        .card-media {
+            height: 160px;
+            background: #0f0f0f;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .media-icon {
+            font-size: 3.2rem;
+            color: #e50914;
+            opacity: 0.9;
+        }
+
+        .card-content {
+            padding: 1.2rem;
+        }
+
+        .card-title {
+            font-weight: 700;
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .card-type {
+            font-size: 0.7rem;
+            background: #2c2c2c;
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            color: #e50914;
+            font-weight: 600;
+        }
+
+        .card-desc {
+            font-size: 0.85rem;
+            color: #b0b0b0;
+            margin: 0.5rem 0;
+            line-height: 1.3rem;
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 0.8rem;
+            font-size: 0.75rem;
+            color: #777;
+        }
+
+        .badge-tag {
+            background: #e509141a;
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            color: #e50914;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: #0f0f0f;
+            width: 85%;
+            max-width: 900px;
+            border-radius: 20px;
+            overflow-y: auto;
+            max-height: 85vh;
+            border: 1px solid #333;
+            animation: fadeUp 0.2s ease;
+        }
+
+        .modal-header {
+            padding: 1.2rem 1.8rem;
+            border-bottom: 1px solid #2a2a2a;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h3 {
+            font-size: 1.5rem;
+        }
+
+        .modal-body {
+            padding: 1.8rem;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+
+        /* ==================== ADMIN DASHBOARD ==================== */
+        .admin-container {
+            display: none;
+            min-height: 100vh;
+            background-color: #0b0b0b;
+        }
+
+        .admin-header {
+            background: linear-gradient(77deg, rgba(229,9,20,0.2) 0%, rgba(0,0,0,0.85) 100%);
+            padding: 2rem 4rem;
+            border-bottom: 1px solid #2a2a2a;
+            position: relative;
+        }
+
+        .admin-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        .admin-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .stat-card {
+            background: #1a1a1a;
+            border: 1px solid #2c2c2c;
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #e50914;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+
+        .admin-content {
+            padding: 2rem 4rem;
+        }
+
+        .filter-section {
+            background: #1a1a1a;
+            border: 1px solid #2c2c2c;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .filter-section input, .filter-section select {
+            background: #0f0f0f;
+            border: 1px solid #333;
+            padding: 10px 12px;
+            border-radius: 6px;
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+            outline: none;
+        }
+
+        .filter-section input:focus, .filter-section select:focus {
+            border-color: #e50914;
+        }
+
+        .filter-section button {
+            background: #e50914;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .filter-section button:hover {
+            background: #b81a24;
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+            background: #1a1a1a;
+            border-radius: 12px;
+            border: 1px solid #2c2c2c;
+        }
+
+        .access-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        .access-table thead {
+            background: #0f0f0f;
+            border-bottom: 2px solid #e50914;
+        }
+
+        .access-table th {
+            padding: 1rem;
+            text-align: left;
+            font-weight: 700;
+            color: #e50914;
+        }
+
+        .access-table tbody tr {
+            border-bottom: 1px solid #2a2a2a;
+            transition: 0.2s;
+        }
+
+        .access-table tbody tr:hover {
+            background: #0f0f0f;
+        }
+
+        .access-table td {
+            padding: 1rem;
+            color: #ddd;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .status-active {
+            background: #0a3a0a;
+            color: #4ade80;
+        }
+
+        .status-offline {
+            background: #3a0a0a;
+            color: #ff6b6b;
+        }
+
+        .no-data {
+            text-align: center;
+            padding: 2rem;
+            color: #666;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.8rem;
+            color: #4a4a4a;
+            border-top: 1px solid #1f1f1f;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 1rem; }
+            .admin-content { padding: 1rem; }
+            .login-box { padding: 1.5rem; }
+            .dashboard-header { padding: 1.5rem; }
+            .top-nav { padding: 1rem; }
+            .admin-stats { grid-template-columns: 1fr; }
+            .filter-section { flex-direction: column; }
+            .filter-section input { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ==================== LOGIN PAGE ==================== -->
+<div id="loginPage" class="login-container">
+    <div class="login-background"></div>
+    <div class="login-box">
+        <div class="login-logo">
+            <i class="fas fa-flask-vial"></i>
+            <h2>Training U-39</h2>
+            <p>Craqueamento Industrial | Acesso Seguro</p>
+        </div>
+
+        <div id="loginError" class="login-error">
+            <i class="fas fa-exclamation-circle"></i>
+            <span id="errorMsg"></span>
+        </div>
+
+        <form class="login-form" id="loginForm" onsubmit="handleLogin(event)">
+            <div class="form-group">
+                <label><i class="fas fa-envelope"></i> Email Corporativo</label>
+                <input type="email" id="loginEmail" placeholder="seu.nome@acelen.com" required autocomplete="email">
+            </div>
+
+            <div class="form-group">
+                <label><i class="fas fa-key"></i> Matrícula (Senha)</label>
+                <input type="password" id="loginPassword" placeholder="Sua matrícula" required autocomplete="current-password">
+            </div>
+
+            <div class="login-remember">
+                <input type="checkbox" id="rememberMe">
+                <label for="rememberMe">Manter-me conectado</label>
+            </div>
+
+            <button type="submit" class="btn-login">
+                <i class="fas fa-sign-in-alt"></i> ENTRAR
+            </button>
+        </form>
+
+        <div class="login-footer">
+            <p><i class="fas fa-shield-alt"></i> Conexão segura e criptografada</p>
+            <p style="margin-top: 0.5rem;">Apenas colaboradores autorizados da Acelen</p>
+            <div class="admin-toggle">
+                <span>Acesso Administrativo? <a onclick="toggleAdminLogin()">Clique aqui</a></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== MEMBER DASHBOARD ==================== -->
+<div id="memberDashboard" class="dashboard-container">
+    <div class="top-nav">
+        <div class="nav-brand">
+            <i class="fas fa-flask-vial"></i> Training U-39
+        </div>
+        <div class="nav-menu">
+            <a href="#" onclick="scrollToSection('templates')">Materiais</a>
+            <a href="#" onclick="scrollToSection('info')">Informações</a>
+        </div>
+        <div class="nav-user">
+            <div class="user-avatar" title="Perfil do usuário" onclick="toggleUserMenu()">
+                <span id="userInitial">U</span>
+            </div>
+            <button class="btn-logout" onclick="logout()">
+                <i class="fas fa-sign-out-alt"></i> Sair
+            </button>
+        </div>
+    </div>
+
+    <div class="dashboard-header">
+        <div class="dashboard-header-content">
+            <div class="user-badge">BEM-VINDO</div>
+            <h1>Bem-vindo, <span id="userNameDisplay">Usuário</span>!</h1>
+            <p>Processos de craqueamento catalítico. Conteúdo interativo para auxiliar no treinamento dos novos operadores de painel da unidade U-39.</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="section-title" id="templates">📦 Templates & Materiais</div>
+        <div id="cardsContainer" class="cards-grid"></div>
+
+        <div class="section-title" id="info">⚙️ Informações sobre Craqueamento Industrial</div>
+        <div id="infoHighlights" class="cards-grid"></div>
+    </div>
+
+    <!-- Modal -->
+    <div id="detailModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Título</h3>
+                <button class="close-modal" id="closeModalBtn"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body" id="modalBody">Conteúdo...</div>
+        </div>
+    </div>
+
+    <footer>
+        <i class="fas fa-flask"></i> Training | Craqueamento Industrial - U-39 | Acesso restrito a colaboradores autorizados
+    </footer>
+</div>
+
+<!-- ==================== ADMIN DASHBOARD ==================== -->
+<div id="adminDashboard" class="admin-container">
+    <div class="top-nav">
+        <div class="nav-brand">
+            <i class="fas fa-shield-alt"></i> Painel Administrativo
+        </div>
+        <div class="nav-menu"></div>
+        <div class="nav-user">
+            <button class="btn-logout" onclick="logoutAdmin()">
+                <i class="fas fa-sign-out-alt"></i> Sair
+            </button>
+        </div>
+    </div>
+
+    <div class="admin-header">
+        <h1 class="admin-title">📊 Painel de Controle Administrativo</h1>
+        <p style="color: #aaa; margin-top: 0.5rem;">Monitoramento de acessos e atividades dos usuários do Training U-39</p>
+        
+        <div class="admin-stats">
+            <div class="stat-card">
+                <div class="stat-number" id="statTotalUsers">0</div>
+                <div class="stat-label">Total de Usuários Autorizados</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="statActiveToday">0</div>
+                <div class="stat-label">Acessos Hoje</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="statOnlineNow">0</div>
+                <div class="stat-label">Conectados Agora</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="statTotalAccess">0</div>
+                <div class="stat-label">Total de Acessos</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="admin-content">
+        <div class="filter-section">
+            <input type="text" id="filterEmail" placeholder="Filtrar por email...">
+            <input type="date" id="filterDate" onchange="filterAccessLogs()">
+            <select id="filterStatus" onchange="filterAccessLogs()">
+                <option value="">Todos os status</option>
+                <option value="online">Conectado</option>
+                <option value="offline">Desconectado</option>
+            </select>
+            <button onclick="filterAccessLogs()"><i class="fas fa-filter"></i> Filtrar</button>
+            <button onclick="exportAccessLogs()" style="background: #333; margin-left: auto;">
+                <i class="fas fa-download"></i> Exportar
+            </button>
+        </div>
+
+        <div class="table-responsive">
+            <table class="access-table">
+                <thead>
+                    <tr>
+                        <th>Email</th>
+                        <th>Nome</th>
+                        <th>Data de Acesso</th>
+                        <th>Hora de Acesso</th>
+                        <th>Duração (min)</th>
+                        <th>Status</th>
+                        <th>Endereço IP</th>
+                    </tr>
+                </thead>
+                <tbody id="accessTableBody">
+                    <tr>
+                        <td colspan="7" class="no-data">Carregando dados...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <footer>
+        <i class="fas fa-shield-alt"></i> Painel Administrativo Seguro | Dados sensíveis protegidos
+    </footer>
+</div>
+
+<script>
+    // ===================== SISTEMA DE AUTENTICAÇÃO SEGURO =====================
+    // Dados dos usuários autorizados (simular backend)
+    const authorizedUsers = [
+        { email: 'ralmeida@acelen.com', matricula: '000', nome: 'Robson Almeida' },
+        { email: 'truman@acelen.com', matricula: '001', nome: 'Iura Muniz' },
+        { email: 'carlos.oliveira@acelen.com', matricula: '12347', nome: 'Carlos Oliveira' },
+        { email: 'ana.costa@acelen.com', matricula: '12348', nome: 'Ana Costa' },
+        { email: 'pedro.mendes@acelen.com', matricula: '12349', nome: 'Pedro Mendes' }
+    ];
+
+    // Credenciais de admin (seguras)
+    const adminCredentials = {
+        email: 'admin@acelen.com',
+        senha: 'Admin@2024Seguro'
+    };
+
+    // Registro de acessos (simular banco de dados)
+    let accessLogs = [];
+
+    // Session storage
+    let currentSession = null;
+
+    // ===================== TEMPLATES E CONTEÚDO =====================
+    const templatesArray = [
+        {
+            id: "t1",
+            title: "CENTUM VP",
+            type: "presentation",
+            url: "https://acc-10850.ispring.com/app/preview/dc351d8a-2e0c-11f1-af63-1adb42af3a6e",
+            desc: "Responsavel por fornecer blocos funcionais para monitoramento, controle, manipulações, cálculos, funções lógicas e sequências.",
+            infoExtra: "Engloba controle contínuo e avancado de sequência complexa, que pode ser executado em um ambiente de controle redundante, seguro e confiável."
+        },
+        {
+            id: "t2",
+            title: "Carga da unidade X Dispersao",
+            type: "presentation",
+            url: "",
+            desc: "Responsável pelo recebimento e pré-aquecimento do RV e GOP e sua atomização com vapor através de injetores, garantindo o contato ideal com o catalisador na base do riser.",
+            infoExtra: "A temperatura de pré-aquecimento da carga é controlada para garantir a vaporização instantânea no riser sem causar o coqueamento prematuro nos bicos injetores."
+        },
+        {
+            id: "t3",
+            title: "Sistema Conversor",
+            type: "video",
+            url: "https://www.youtube.com/embed/tSJqB9GqU8g?si=Ed7zr1YzRrHxkAWJ",
+            desc: "Promove a reação de craqueamento no riser e a regeneração contínua do catalisador através da queima do coque para manter o balanço térmico da unidade.",
+            infoExtra: "A circulação do catalisador entre o reator e o regenerador é controlada por válvulas de deslizamento (slide valves) para estabilizar as pressões e temperaturas do processo."
+        },
+        {
+            id: "t4",
+            title: "Fundamentos do Craqueamento Térmico",
+            type: "presentation",
+            url: "https://view.officeapps.live.com/op/embed.aspx?src=https://www.example.com/sample-cracking.pptx",
+            desc: "Slides com mecanismos de reação, parâmetros operacionais e segurança.",
+            infoExtra: "Aborda a quebra de hidrocarbonetos por calor, radicais livres, e aplicações em coque e viscorredutor."
+        },
+        {
+            id: "t5",
+            title: "Estudo de Caso: Otimização de Catalisadores",
+            type: "info",
+            url: "",
+            desc: "Relatório técnico: Zeólitas e matrizes ativas no craqueamento catalítico.",
+            infoExtra: "Catalisadores à base de zeólita Y aumentam seletividade para gasolina. Conteúdo complementar com dados de rendimento."
+        },
+        {
+            id: "t6",
+            title: "Segurança em Unidades de Craqueamento",
+            type: "video",
+            url: "https://www.youtube.com/embed/YjZ7pzJ-9bQ",
+            desc: "Boas práticas, prevenção de coqueamento e riscos de explosão.",
+            infoExtra: "NR-13 e gestão de integridade em refinarias. Dicas de inspeção."
+        }
+    ];
+
+    const techInfoCards = [
+        {
+            title: "⚡ Reações de Craqueamento",
+            desc: "Quebra de cadeias longas em hidrocarbonetos menores. Mecanismo via radicais livres (térmico) ou sítios ácidos (catalítico).",
+            icon: "fas fa-fire"
+        },
+        {
+            title: "🏭 Principais Produtos",
+            desc: "Eteno, propeno, gasolina, GLP, propano.",
+            icon: "fas fa-oil-can"
+        },
+        {
+            title: "📊 Variáveis Críticas",
+            desc: "Temperatura, pressão parcial, tempo de residência, relação vapor/hidrocarboneto, atividade do catalisador.",
+            icon: "fas fa-chart-line"
+        },
+        {
+            title: "🔬 Inovações & Descarbonização",
+            desc: "Craqueamento elétrico (e-cracking), captura de CO₂ e uso de biomassa como matéria-prima renovável.",
+            icon: "fas fa-leaf"
+        }
+    ];
+
+    // ===================== FUNÇÕES DE AUTENTICAÇÃO =====================
+    function handleLogin(event) {
+        event.preventDefault();
+        const email = document.getElementById('loginEmail').value.toLowerCase().trim();
+        const matricula = document.getElementById('loginPassword').value.trim();
+        const errorDiv = document.getElementById('loginError');
+        const errorMsg = document.getElementById('errorMsg');
+
+        // Validar se é email corporativo
+        if (!email.endsWith('@acelen.com')) {
+            showError('Por favor, use um email corporativo válido (@acelen.com)');
+            return;
+        }
+
+        // Buscar usuário autorizado
+        const user = authorizedUsers.find(u => u.email === email && u.matricula === matricula);
+
+        if (!user) {
+            showError('Email ou matrícula inválidos. Acesso negado.');
+            return;
+        }
+
+        // Login bem-sucedido
+        const sessionToken = generateSessionToken();
+        currentSession = {
+            email: user.email,
+            nome: user.nome,
+            token: sessionToken,
+            loginTime: new Date(),
+            rememberMe: document.getElementById('rememberMe').checked
+        };
+
+        // Registrar acesso
+        logUserAccess(user.email, user.nome, 'online');
+
+        // Salvar sessão (se marcar rememberMe)
+        if (currentSession.rememberMe) {
+            localStorage.setItem('userSession', JSON.stringify({
+                email: user.email,
+                nome: user.nome,
+                token: sessionToken
+            }));
+        }
+
+        // Limpar erro e exibir dashboard
+        errorDiv.classList.remove('show');
+        document.getElementById('loginForm').reset();
+        showMemberDashboard();
+    }
+
+    function toggleAdminLogin() {
+        const loginBox = document.querySelector('.login-box');
+        const loginForm = document.getElementById('loginForm');
+        
+        if (loginForm.id === 'loginForm') {
+            // Mostrar formulário admin
+            loginForm.id = 'adminLoginForm';
+            document.querySelector('.login-logo h2').textContent = 'Acesso Administrativo';
+            document.querySelector('.login-logo p').textContent = 'Painel de controle seguro';
+            
+            loginForm.innerHTML = `
+                <div class="form-group">
+                    <label><i class="fas fa-user-shield"></i> Email Admin</label>
+                    <input type="email" id="adminEmail" placeholder="admin@acelen.com" required>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-key"></i> Senha Admin</label>
+                    <input type="password" id="adminPassword" placeholder="Senha" required>
+                </div>
+                <button type="submit" class="btn-login" onclick="handleAdminLogin(event)">
+                    <i class="fas fa-sign-in-alt"></i> ACESSO ADMIN
+                </button>
+            `;
+            
+            // Botão para voltar
+            const footer = document.querySelector('.login-footer');
+            footer.innerHTML = '<a onclick="toggleAdminLogin()" style="color:#e50914; cursor:pointer; text-decoration:underline;">← Voltar ao login de usuário</a>';
+        } else {
+            // Voltar para login normal
+            location.reload();
+        }
+    }
+
+    function handleAdminLogin(event) {
+        event.preventDefault();
+        const email = document.getElementById('adminEmail').value.toLowerCase().trim();
+        const senha = document.getElementById('adminPassword').value.trim();
+        const errorDiv = document.getElementById('loginError');
+
+        if (email === adminCredentials.email && senha === adminCredentials.senha) {
+            // Login admin bem-sucedido
+            const sessionToken = generateSessionToken();
+            currentSession = {
+                email: email,
+                nome: 'Administrador',
+                token: sessionToken,
+                isAdmin: true,
+                loginTime: new Date()
+            };
+
+            // Registrar acesso admin
+            logAdminAccess('admin@acelen.com', 'Administrador');
+
+            errorDiv.classList.remove('show');
+            showAdminDashboard();
+        } else {
+            showError('Credenciais de administrador inválidas.');
+        }
+    }
+
+    function showError(message) {
+        const errorDiv = document.getElementById('loginError');
+        const errorMsg = document.getElementById('errorMsg');
+        errorMsg.textContent = message;
+        errorDiv.classList.add('show');
+        setTimeout(() => {
+            errorDiv.classList.remove('show');
+        }, 5000);
+    }
+
+    function generateSessionToken() {
+        return 'token_' + Math.random().toString(36).substr(2, 9) + '_' + Date.now();
+    }
+
+    // ===================== FUNÇÕES DE DASHBOARD DO MEMBRO =====================
+    function showMemberDashboard() {
+        document.getElementById('loginPage').style.display = 'none';
+        document.getElementById('memberDashboard').style.display = 'block';
+        document.getElementById('userNameDisplay').textContent = currentSession.nome.split(' ')[0];
+        document.getElementById('userInitial').textContent = currentSession.nome.charAt(0).toUpperCase();
+        renderTemplates();
+        renderTechHighlights();
+    }
+
+    function renderTemplates() {
+        const container = document.getElementById('cardsContainer');
+        if (!container) return;
+        container.innerHTML = '';
+        templatesArray.forEach((item) => {
+            const card = document.createElement('div');
+            card.className = 'template-card';
+            let iconHtml = '';
+            if (item.type === 'video') {
+                iconHtml = '<i class="fas fa-play-circle media-icon"></i>';
+            } else if (item.type === 'presentation') {
+                iconHtml = '<i class="fas fa-file-powerpoint media-icon"></i>';
+            } else {
+                iconHtml = '<i class="fas fa-info-circle media-icon"></i>';
+            }
+            card.innerHTML = `
+                <div class="card-media">
+                    ${iconHtml}
+                </div>
+                <div class="card-content">
+                    <div class="card-title">
+                        ${item.title}
+                        <span class="card-type">${item.type === 'video' ? 'VÍDEO' : (item.type === 'presentation' ? 'APRESENTAÇÃO' : 'INFORMAÇÃO')}</span>
+                    </div>
+                    <div class="card-desc">${item.desc.length > 80 ? item.desc.substring(0,80)+'...' : item.desc}</div>
+                    <div class="card-footer">
+                        <span><i class="fas fa-industry"></i> Craqueamento</span>
+                        <span class="badge-tag"><i class="fas fa-eye"></i> Detalhar</span>
+                    </div>
+                </div>
+            `;
+            card.addEventListener('click', () => openModal(item));
+            container.appendChild(card);
+        });
+    }
+
+    function renderTechHighlights() {
+        const highlightContainer = document.getElementById('infoHighlights');
+        if (!highlightContainer) return;
+        highlightContainer.innerHTML = '';
+        techInfoCards.forEach(info => {
+            const card = document.createElement('div');
+            card.className = 'template-card';
+            card.innerHTML = `
+                <div class="card-media">
+                    <i class="${info.icon}" style="font-size:2.8rem;"></i>
+                </div>
+                <div class="card-content">
+                    <div class="card-title">${info.title}</div>
+                    <div class="card-desc">${info.desc}</div>
+                    <div class="card-footer">
+                        <span><i class="fas fa-flask"></i> Processo industrial</span>
+                    </div>
+                </div>
+            `;
+            highlightContainer.appendChild(card);
+        });
+    }
+
+    function openModal(item) {
+        const modal = document.getElementById('detailModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalBody = document.getElementById('modalBody');
+        modalTitle.innerText = item.title;
+
+        let innerHtml = `<div style="margin-bottom: 1rem;"><span class="badge-tag" style="background:#e5091422;">${item.type.toUpperCase()}</span></div>`;
+        innerHtml += `<div style="margin-bottom: 1.2rem;"><i class="fas fa-info-circle"></i> ${item.desc}</div>`;
+
+        if (item.type === 'video' && item.url) {
+            let embedUrl = item.url;
+            if (item.url.includes('youtube.com/watch')) {
+                let videoId = item.url.split('v=')[1];
+                if (videoId && videoId.includes('&')) videoId = videoId.split('&')[0];
+                embedUrl = `https://www.youtube.com/embed/${videoId}`;
+            } else if (item.url.includes('youtu.be')) {
+                let videoId = item.url.split('/').pop();
+                embedUrl = `https://www.youtube.com/embed/${videoId}`;
+            }
+            innerHtml += `<div style="margin:1rem 0; border-radius:12px; overflow:hidden;">
+                            <iframe src="${embedUrl}" frameborder="0" allowfullscreen style="width:100%; height:350px;"></iframe>
+                          </div>`;
+        } 
+        else if (item.type === 'presentation' && item.url) {
+            innerHtml += `<div style="background:#1c1c1c; border-radius:12px; padding:1rem; margin:1rem 0;">
+                            <p><i class="fas fa-file-powerpoint"></i> Apresentação incorporada:</p>
+                            <iframe src="${item.url}" style="width:100%; height:350px; background:#fff; border-radius:8px; margin-top:10px;"></iframe>
+                            <p style="margin-top:12px; font-size:0.8rem;">Caso o link não carregue, <a href="${item.url}" target="_blank" style="color:#e50914;">abrir em nova aba</a></p>
+                          </div>`;
+        } 
+        else {
+            innerHtml += `<div style="background:#1c1c1c; border-radius:12px; padding:1.5rem; margin-top:1rem;">
+                            <h4><i class="fas fa-microchip"></i> Informações Técnicas</h4>
+                            <p>${item.infoExtra || 'Conteúdo focado em craqueamento industrial.'}</p>
+                          </div>`;
+        }
+
+        if (item.infoExtra) {
+            innerHtml += `<div style="margin-top:1rem; background:#0a0a0a; border-left:4px solid #e50914; padding:0.8rem 1rem; border-radius:8px;">
+                            <i class="fas fa-cogs"></i> <strong>Detalhes:</strong> ${item.infoExtra}
+                          </div>`;
+        }
+
+        innerHtml += `<div style="margin-top:1.2rem; display:flex; justify-content:flex-end;">
+                        <button id="completedBtn" class="btn-logout" style="background:#0a3a0a; border-color:#4ade80; color:#4ade80; font-size:0.8rem;">
+                            <i class="fas fa-check-circle"></i> Marcar como concluído
+                        </button>
+                      </div>`;
+        
+        modalBody.innerHTML = innerHtml;
+        modal.style.display = 'flex';
+
+        document.getElementById('completedBtn').addEventListener('click', () => {
+            alert('✅ Material concluído! Progresso registrado.');
+        });
+    }
+
+    function closeModal() {
+        document.getElementById('detailModal').style.display = 'none';
+    }
+
+    function scrollToSection(sectionId) {
+        const element = document.getElementById(sectionId);
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
+
+    function logout() {
+        if (currentSession) {
+            logUserAccess(currentSession.email, currentSession.nome, 'offline');
+        }
+        currentSession = null;
+        localStorage.removeItem('userSession');
+        document.getElementById('memberDashboard').style.display = 'none';
+        document.getElementById('loginPage').style.display = 'flex';
+        document.getElementById('loginForm').reset();
+    }
+
+    // ===================== FUNÇÕES DE ADMIN =====================
+    function showAdminDashboard() {
+        document.getElementById('loginPage').style.display = 'none';
+        document.getElementById('adminDashboard').style.display = 'block';
+        updateAdminStats();
+        loadAccessLogs();
+    }
+
+    function logUserAccess(email, nome, status) {
+        // Registrar acesso do usuário
+        const now = new Date();
+        
+        // Se é offline, encontrar o registro de login correspondente
+        if (status === 'offline' && accessLogs.length > 0) {
+            const lastOnlineLog = accessLogs.filter(log => log.email === email).reverse().find(log => log.status === 'online');
+            if (lastOnlineLog) {
+                const duration = Math.round((now - new Date(lastOnlineLog.timestamp)) / 60000);
+                lastOnlineLog.duration = duration;
+                lastOnlineLog.logoutTime = now.toISOString();
+            }
+        }
+
+        accessLogs.push({
+            email: email,
+            nome: nome,
+            timestamp: now.toISOString(),
+            date: now.toLocaleDateString('pt-BR'),
+            time: now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit', second: '2-digit' }),
+            status: status,
+            duration: 0,
+            ip: generateFakeIP()
+        });
+
+        localStorage.setItem('accessLogs', JSON.stringify(accessLogs));
+    }
+
+    function logAdminAccess(email, nome) {
+        const now = new Date();
+        accessLogs.push({
+            email: email,
+            nome: nome,
+            timestamp: now.toISOString(),
+            date: now.toLocaleDateString('pt-BR'),
+            time: now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit', second: '2-digit' }),
+            status: 'admin_online',
+            duration: 0,
+            ip: generateFakeIP()
+        });
+        localStorage.setItem('accessLogs', JSON.stringify(accessLogs));
+    }
+
+    function generateFakeIP() {
+        return `192.168.${Math.floor(Math.random()*255)}.${Math.floor(Math.random()*255)}`;
+    }
+
+    function updateAdminStats() {
+        const now = new Date();
+        const today = now.toLocaleDateString('pt-BR');
+        
+        // Total de usuários autorizados
+        document.getElementById('statTotalUsers').textContent = authorizedUsers.length;
+
+        // Acessos hoje
+        const accessestoday = accessLogs.filter(log => log.date === today && log.status === 'online').length;
+        document.getElementById('statActiveToday').textContent = accessestoday;
+
+        // Conectados agora
+        const onlineNow = accessLogs.filter(log => log.status === 'online').length - 
+                         accessLogs.filter(log => log.status === 'offline').length;
+        document.getElementById('statOnlineNow').textContent = Math.max(0, onlineNow);
+
+        // Total de acessos
+        document.getElementById('statTotalAccess').textContent = accessLogs.filter(log => log.status === 'online').length;
+    }
+
+    function loadAccessLogs() {
+        const tableBody = document.getElementById('accessTableBody');
+        
+        if (accessLogs.length === 0) {
+            tableBody.innerHTML = '<tr><td colspan="7" class="no-data">Nenhum acesso registrado ainda.</td></tr>';
+            return;
+        }
+
+        tableBody.innerHTML = '';
+        accessLogs.forEach(log => {
+            const row = document.createElement('tr');
+            const statusClass = log.status === 'online' ? 'status-active' : 'status-offline';
+            const statusText = log.status === 'online' ? 'Conectado' : (log.status === 'offline' ? 'Desconectado' : 'Admin');
+            
+            row.innerHTML = `
+                <td>${maskEmail(log.email)}</td>
+                <td>${log.nome}</td>
+                <td>${log.date}</td>
+                <td>${log.time}</td>
+                <td>${log.duration || '-'}</td>
+                <td><span class="status-badge ${statusClass}">${statusText}</span></td>
+                <td>${log.ip}</td>
+            `;
+            tableBody.appendChild(row);
+        });
+    }
+
+    function maskEmail(email) {
+        // Máscara de privacidade: mostrar apenas primeira letra e domínio
+        const [local, domain] = email.split('@');
+        return local.charAt(0) + '*'.repeat(local.length - 1) + '@' + domain;
+    }
+
+    function filterAccessLogs() {
+        const emailFilter = document.getElementById('filterEmail').value.toLowerCase();
+        const dateFilter = document.getElementById('filterDate').value;
+        const statusFilter = document.getElementById('filterStatus').value;
+        
+        let filtered = accessLogs;
+
+        if (emailFilter) {
+            filtered = filtered.filter(log => log.email.toLowerCase().includes(emailFilter));
+        }
+
+        if (dateFilter) {
+            filtered = filtered.filter(log => log.date === new Date(dateFilter).toLocaleDateString('pt-BR'));
+        }
+
+        if (statusFilter) {
+            filtered = filtered.filter(log => {
+                if (statusFilter === 'online') return log.status === 'online';
+                if (statusFilter === 'offline') return log.status === 'offline';
+            });
+        }
+
+        const tableBody = document.getElementById('accessTableBody');
+        if (filtered.length === 0) {
+            tableBody.innerHTML = '<tr><td colspan="7" class="no-data">Nenhum registro encontrado com os filtros aplicados.</td></tr>';
+            return;
+        }
+
+        tableBody.innerHTML = '';
+        filtered.forEach(log => {
+            const row = document.createElement('tr');
+            const statusClass = log.status === 'online' ? 'status-active' : 'status-offline';
+            const statusText = log.status === 'online' ? 'Conectado' : (log.status === 'offline' ? 'Desconectado' : 'Admin');
+            
+            row.innerHTML = `
+                <td>${maskEmail(log.email)}</td>
+                <td>${log.nome}</td>
+                <td>${log.date}</td>
+                <td>${log.time}</td>
+                <td>${log.duration || '-'}</td>
+                <td><span class="status-badge ${statusClass}">${statusText}</span></td>
+                <td>${log.ip}</td>
+            `;
+            tableBody.appendChild(row);
+        });
+    }
+
+    function exportAccessLogs() {
+        let csv = 'Email,Nome,Data,Hora,Duração (min),Status,IP\n';
+        accessLogs.forEach(log => {
+            csv += `"${maskEmail(log.email)}","${log.nome}","${log.date}","${log.time}","${log.duration || '-'}","${log.status}","${log.ip}"\n`;
+        });
+
+        const element = document.createElement('a');
+        element.setAttribute('href', 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv));
+        element.setAttribute('download', `access_logs_${new Date().toISOString().split('T')[0]}.csv`);
+        element.style.display = 'none';
+        document.body.appendChild(element);
+        element.click();
+        document.body.removeChild(element);
+    }
+
+    function logoutAdmin() {
+        currentSession = null;
+        document.getElementById('adminDashboard').style.display = 'none';
+        document.getElementById('loginPage').style.display = 'flex';
+    }
+
+    // ===================== EVENTOS =====================
+    document.getElementById('closeModalBtn').addEventListener('click', closeModal);
+    window.addEventListener('click', (e) => {
+        const modal = document.getElementById('detailModal');
+        if (e.target === modal) closeModal();
+    });
+
+    // Carregar logs do localStorage ao iniciar
+    const savedLogs = localStorage.getItem('accessLogs');
+    if (savedLogs) {
+        accessLogs = JSON.parse(savedLogs);
+    }
+
+    // Verificar se há sessão salva
+    window.addEventListener('load', () => {
+        const savedSession = localStorage.getItem('userSession');
+        if (savedSession) {
+            const session = JSON.parse(savedSession);
+            // Revalidar se user ainda está na lista autorizada
+            const userExists = authorizedUsers.find(u => u.email === session.email);
+            if (userExists) {
+                currentSession = session;
+                showMemberDashboard();
+                logUserAccess(session.email, session.nome, 'online');
+            }
+        }
+    });
+</script>
+</body>
+</html>
